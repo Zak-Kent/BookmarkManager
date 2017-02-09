@@ -59,10 +59,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        Parent Component
-        <Subject items={this.state.resources[0]}/>
-        <Subject items={this.state.resources[1]}/>
-        <Subject items={this.state.resources[2]}/>
+        {
+          this.state.resources.map((resource) => {
+            return(
+              <Subject items={resource}/>
+            )
+          })
+        }
       </div>
     );
   }
