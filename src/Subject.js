@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Subject extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.handleClick = this.handleClick.bind(this);
 
@@ -15,11 +15,6 @@ export default class Subject extends Component {
       this.setState(prevState => ({
         isClicked: !prevState.isClicked
       }));
-      console.log(this.state.isClicked);
-
-      setTimeout(() => {
-        console.log(this.state.isClicked)
-      }, 100)
   }
 
   render() {
@@ -30,11 +25,13 @@ export default class Subject extends Component {
         <ul>
           {
             this.props.items.resources.map((resource) => {
-              return(
-                <li>
-                  <a href={resource.url}>{resource.title}</a>
-                </li>
-              )
+              if (this.state.isClicked) {
+                return(
+                  <li>
+                    <a href={resource.url}>{resource.title}</a>
+                  </li>
+                )
+              }
             })
           }
         </ul>
