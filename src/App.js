@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Subject from './Subject.js';
 
+
 class App extends Component {
   constructor() {
     super();
+
+    this.addResource = this.addResource.bind(this);
 
     this.state = {resources: [
 
@@ -56,13 +59,20 @@ class App extends Component {
     ]}
   }
 
+  addResource(resource, subject) {
+    const tempState = this.state;
+    tempState.resources[subject].resources.push(resource);
+    this.setState(tempState)
+  }
+
   render() {
     return (
       <div>
         {
-          this.state.resources.map((resource) => {
+          this.state.resources.map((resource, idx) => {
             return(
-              <Subject items={resource}/>
+              <Subject key={idx} index={idx} addResource={this.addResource} items={resource}/>
+
             )
           })
         }
