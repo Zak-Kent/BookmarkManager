@@ -5,16 +5,22 @@ export default class Subject extends Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleTyping = this.handleTyping.bind(this);
 
     this.state = {
-      isClicked: false
+      isClicked: false,
+      newResourceTitle: '',
     }
   }
 
   handleClick() {
-      this.setState(prevState => ({
-        isClicked: !prevState.isClicked
-      }));
+    this.setState(prevState => ({
+      isClicked: !prevState.isClicked
+    }));
+  }
+
+  handleTyping(e) {
+    this.setState({newResourceTitle: e.target.value})
   }
 
   render() {
@@ -35,6 +41,8 @@ export default class Subject extends Component {
             })
           }
         </ul>
+
+        <input onChange={this.handleTyping} value={this.state.newResourceTitle}/>
       </div>
     )
   }
