@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Subject from './Subject.js';
+import AddTopic from './Topic.jsx';
 
 
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
     super();
 
     this.addResource = this.addResource.bind(this);
+    this.addTopic = this.addTopic.bind(this);
 
     this.state = {resources: [
 
@@ -62,7 +64,21 @@ class App extends Component {
   addResource(resource, subject) {
     const tempState = this.state;
     tempState.resources[subject].resources.push(resource);
-    this.setState(tempState)
+    this.setState(tempState);
+  }
+
+  addTopic(topic) {
+    const tempState = this.state;
+
+    let newSubject = {
+      subject: topic,
+      resources: [],
+    }
+
+    tempState.resources.push(newSubject);
+    console.log(tempState);
+
+    this.setState(tempState);
   }
 
   render() {
@@ -72,10 +88,10 @@ class App extends Component {
           this.state.resources.map((resource, idx) => {
             return(
               <Subject key={idx} index={idx} addResource={this.addResource} items={resource}/>
-
             )
           })
         }
+        <AddTopic addTopic={this.addTopic} />
       </div>
     );
   }

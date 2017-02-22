@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { MyList } from './list.jsx';
-
 
 export default class Subject extends Component {
   constructor(props) {
@@ -65,8 +63,6 @@ export default class Subject extends Component {
         <input name="resourceTitle" onChange={this.handleTyping} value={this.state.resourceTitle}/>
         <input name="url" onChange={this.handleTyping} value={this.state.url}/>
         <button onClick={this.handleInput}>Add Item</button>
-        <MyList items={this.props.items}/>
-
 
       </div>
     )
