@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 
-export default class AddTopic extends Component {
-    constructor(props) {
+export default class Topic extends Component {
+  constructor(props) {
     super(props);
 
     this.handleTyping = this.handleTyping.bind(this);

@@ -7,6 +7,7 @@ export default class Subject extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleTyping = this.handleTyping.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       isClicked: false,
@@ -16,6 +17,8 @@ export default class Subject extends Component {
   }
 
   handleClick() {
+    // removed if statement that decides if title is clicked and wheter to show options
+    // all options shown now by default
     this.setState(prevState => ({
       isClicked: !prevState.isClicked
     }));
@@ -23,23 +26,25 @@ export default class Subject extends Component {
 
   handleTyping(e) {
     this.setState({[e.target.name]: e.target.value})
-    // console.log("state resource title: ", this.state.resourceTitle)
     e.preventDefault();
+
   }
 
   handleInput(e) {
     e.preventDefault();
-
     const newResource = {
       title: this.state.resourceTitle,
       url: this.state.url
     };
 
-    console.log("key value from props: ", this.props.index)
-
     this.props.addResource(newResource, this.props.index);
-
   }
+
+  handleDelete(e) {
+    this.props.deleteResource(this.props.index);
+    e.preventDefault();
+  }
+
 
   render() {
     return(
@@ -48,14 +53,12 @@ export default class Subject extends Component {
 
         <ul>
           {
-            this.props.items.resources.map((resource, idx) => {
-              if (this.state.isClicked) {
-                return(
-                  <li key={idx}>
-                    <a href={resource.url}>{resource.title}</a>
-                  </li>
-                )
-              }
+            this.props.items.resources.map((resource, idx) => {   
+              return(
+                <li key={idx}>
+                  <a href={resource.url}>{resource.title}</a>
+                </li>
+              )               
             })
           }
         </ul>
@@ -63,6 +66,7 @@ export default class Subject extends Component {
         <input name="resourceTitle" onChange={this.handleTyping} value={this.state.resourceTitle}/>
         <input name="url" onChange={this.handleTyping} value={this.state.url}/>
         <button onClick={this.handleInput}>Add Item</button>
+        <button onClick={this.handleDelete}>Delete Topic</button>
 
       </div>
     )
